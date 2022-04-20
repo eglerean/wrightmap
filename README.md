@@ -1,5 +1,10 @@
+NOTE
+====
+
+This fork is used by the following repository https://github.com/eglerean/sulo for a slightly different plotting of classical Wright map.
+
 Wright Map
-=========
+==========
 
 IRT Item-Person Map with 'ConQuest' Integration
 
