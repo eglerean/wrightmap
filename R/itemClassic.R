@@ -1,5 +1,5 @@
 itemClassic <-
-function(thr, yRange = NULL, axis.items = "Items",axis.logits = "Logits",show.axis.logits = "R",oma = c(0,0,0,3),cutpoints = NULL,...) {
+function(thr, yRange = NULL, axis.items = "Items",axis.logits = "Logits",show.axis.logits = "R",oma = c(0,0,0,3),cutpoints = NULL,item.labels = NULL,...) {
 	Nbins <- function(thr,itemRange) {
 		
 		#print(paste("thr =", c(min(thr),max(thr))))
@@ -41,7 +41,7 @@ function(thr, yRange = NULL, axis.items = "Items",axis.logits = "Logits",show.ax
 	plot(seq(1:nI), rep(0, nI), type = "n", axes = FALSE, xlab = axis.items, ylab = "", ylim = yRange, xlim = c(0.5, nI + 
 		0.5), cex.lab = .8, font.lab = 3)
 
-	box(bty = "o")
+	box(bty = "n")
 	usr <- par("usr")
 	par(mgp = c(3, 1, 0))
 	if (show.axis.logits == "R" | show.axis.logits == TRUE) {
@@ -65,8 +65,8 @@ function(thr, yRange = NULL, axis.items = "Items",axis.logits = "Logits",show.ax
 	bin.size <- abs(item.hist$breaks[1] - item.hist$breaks[2])
 	item.hist <- data.frame(xleft = item.hist$mids - (bin.size/2), ybottom = item.hist$mids * 0, xright = item.hist$mids + 
 		(bin.size/2), ytop = item.hist$counts)
-
-	item.labels <- matrix(rep(formatC(1:nI, digits = 1, format = "d", flag = "0"), nL), ncol = nL)
+	if (is.null(item.labels))
+		item.labels <- matrix(rep(formatC(1:nI, digits = 1, format = "d", flag = "0"), nL), ncol = nL)
 	if(nL > 1){
 		item.labels <- t(apply(item.labels, 1, paste, c(1:nL), sep = "."))
 	}
@@ -81,7 +81,7 @@ function(thr, yRange = NULL, axis.items = "Items",axis.logits = "Logits",show.ax
 
 	binnedList <- unlist(lapply(1:length(itemBinLocations), binItems, item.labels, binnedItems))
 
-	text(cbind(0, itemBinLocations), labels = binnedList, pos = 4, offset = 1 * 15/nI,cex = .65)
+	text(cbind(0, itemBinLocations), labels = binnedList, pos = 4, offset = 1 * 15/nI,cex = .75, family="mono")
 	
 
 	

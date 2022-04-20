@@ -1,5 +1,5 @@
 wrightMap <-
-function(thetas, thresholds = NULL, item.side = itemModern, person.side = personHist,  main.title = "Wright Map", min.logit.pad = 0.25, max.logit.pad = 0.25, min.l = NULL, max.l = NULL, item.prop = 0.8, return.thresholds = TRUE, new.quartz = FALSE, use.hist = NULL,...) {
+function(thetas, thresholds = NULL, item.side = itemModern, person.side = personHist,  main.title = "Wright Map Dev", min.logit.pad = 0.25, max.logit.pad = 0.25, min.l = NULL, max.l = NULL, item.prop = 0.8, return.thresholds = TRUE, new.quartz = FALSE, use.hist = NULL, yRange = NULL, ...) {
 
 	## Helper Functions
 
@@ -26,8 +26,9 @@ function(thetas, thresholds = NULL, item.side = itemModern, person.side = person
 	if (is.null(max.l)) {
 		max.l <- max(c(max.theta, thresholds), na.rm = TRUE) + max.logit.pad
 	}
-
-	yRange <- c(min.l, max.l)
+	
+	if (is.null(yRange))
+		yRange <- c(min.l, max.l)
 	
 	# Generating Full Map
 	
